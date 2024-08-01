@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Username: {{ app_user.username }}
+  </h1>
+
+  <p><strong>First name:</strong> {{ app_user.first_name }}</p>
+  <p><strong>Last name:</strong> {{ app_user.last_name }}</p>
+  <p><strong>Is staff:</strong> {{ app_user.is_staff }}</p>
+
+  <div class="ml-3">
+    <a href="{% url 'todos:app_user-update' pk=app_user.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
+
+    <a href="{% url 'todos:app_user-delete' pk=app_user.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+  </div>
+{% endblock %}
