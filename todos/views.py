@@ -82,7 +82,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     success_url = reverse_lazy("todos:index")
 
 
-class ToggleTaskStatusView(LoginRequiredMixin, generic.UpdateView):
+class TaskToggleStatusView(LoginRequiredMixin, generic.UpdateView):
     def post(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs["pk"])
 
