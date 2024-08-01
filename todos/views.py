@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
 
-from todos.models import Task, Tag
+from todos.models import Task, Tag, AppUser
 
 
 class IndexView(LoginRequiredMixin, generic.ListView):
@@ -37,3 +37,9 @@ class TagUpdateView(LoginRequiredMixin, generic.UpdateView):
 class TagDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Tag
     success_url = reverse_lazy("todos:tags-list")
+
+
+class AppUserDetailView(LoginRequiredMixin, generic.DetailView):
+    model = AppUser
+    template_name = "todos/app_user_detail.html"
+    context_object_name = 'app_user'
