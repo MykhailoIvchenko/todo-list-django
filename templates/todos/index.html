@@ -2,10 +2,15 @@
 
 {% block content %}
   <h1>Todos List App</h1>
-  <p>Welcome to your tasks list {{ app_user.username }}!</p>
+  <p>Welcome to your tasks list,  <strong>{{ app_user.username }}</strong>!</p>
 
   <div class="ml-3">
-      <h4>Tasks</h4>
+      <h4>
+        Tasks 
+        <a class="btn btn-primary" href="{% url 'todos:task-create' %}">
+          Create
+        </a>
+      </h4>
 
       {% for task in tasks_list %}
           <hr>
