@@ -4,7 +4,7 @@ from todos.views import IndexView, TagListView, TagCreateView, TagUpdateView, Ta
     AppUserDetailView, AppUserDeleteView, TaskCreateView, TaskUpdateView, TaskDeleteView
 
 urlpatterns = [
-    path("", IndexView.as_view, name="index"),
+    path("", IndexView.as_view(), name="index"),
     path(
             "tags/",
             TagListView.as_view(),
