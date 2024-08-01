@@ -26,3 +26,9 @@ class TagCreateView(LoginRequiredMixin, generic.CreateView):
     model = Tag
     fields = "__all__"
     success_url = reverse_lazy("todos:tags-list")
+
+
+class TagUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Tag
+    fields = "__all__"
+    success_url = reverse_lazy("todos:tags-list")
