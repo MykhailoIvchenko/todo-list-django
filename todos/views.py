@@ -63,12 +63,24 @@ class AppUserDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     success_url = reverse_lazy("todos:index")
     template_name = "todos/app_user_confirm_delete.html"
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj != self.request.user:
+            raise Http404("You do not have permission to view this page.")
+        return obj
+
 
 class AppUserUpdateView(LoginRequiredMixin, generic.edit.DeleteView):
     model = AppUser
     form_class = AppUserForm
     success_url = reverse_lazy("todos:app_user_detail")
     template_name = "todos/app_user_form.html"
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj != self.request.user:
+            raise Http404("You do not have permission to view this page.")
+        return obj
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
