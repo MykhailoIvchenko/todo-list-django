@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views import generic
 from django.urls import reverse_lazy
-
 from todos.forms import AppUserForm, TaskCreateForm
 from todos.models import Task, Tag, AppUser
 
@@ -70,6 +69,10 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = TaskCreateForm
     success_url = reverse_lazy("todos:index")
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
@@ -82,11 +85,10 @@ class TaskDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     success_url = reverse_lazy("todos:index")
 
 
-class TaskToggleStatusView(LoginRequiredMixin, generic.UpdateView):
+class TaskToggleStatusView(LoginRequiredMixin, generic.View):
     def post(self, request, *args, **kwargs):
         task = get_object_or_404(Task, pk=kwargs["pk"])
-
+        print(task)
         task.is_completed = not task.is_completed
         task.save()
-
         return redirect("todos:index")

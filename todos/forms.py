@@ -18,6 +18,9 @@ class TaskCreateForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         required=False,
     )
+    deadline = forms.DateField(
+            widget=forms.DateInput(attrs={'type': 'date'})
+        )
 
     class Meta:
         model = Task
