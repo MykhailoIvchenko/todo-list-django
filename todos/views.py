@@ -11,6 +11,7 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     model = Task
     paginate_by = 5
     context_object_name = "tasks_list"
+    template_name = "todos/index.html"
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user).select_related("tags")
