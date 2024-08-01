@@ -13,7 +13,12 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = "todos/index.html"
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user).select_related("tags")
+        return Task.objects.filter(user=self.request.user).prefetch_related("tags")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['app_user'] = self.request.user
+        return context
 
 
 class TagListView(LoginRequiredMixin, generic.ListView):
