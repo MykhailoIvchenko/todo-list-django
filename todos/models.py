@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 
 
-class User(AbstractUser):
+class AppUser(AbstractUser):
     class Meta:
         verbose_name = "user"
         verbose_name_plural = "users"
