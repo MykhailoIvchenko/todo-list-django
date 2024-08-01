@@ -64,3 +64,8 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     form_class = TaskCreateForm
     success_url = reverse_lazy("todos:index")
 
+
+class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Task
+    form_class = TaskCreateForm
+    success_url = reverse_lazy("todos:index")
