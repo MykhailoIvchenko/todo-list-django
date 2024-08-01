@@ -1,0 +1,26 @@
+<nav class="sidebar">
+  <ul class="menu">
+    <li class="menu-item">
+      <a href="{% url 'todos:index' %}" class="nav-link">
+        Home
+      </a>
+    </li>
+    <li class="menu-item">
+      <a href="{% url 'todos:tags-list' %}" class="nav-link">
+        Tags
+      </a>
+    </li>
+
+    {% if user.is_authenticated %}
+      <li class="menu-item">
+        <a href="{% url 'todos:app_user-detail' pk=user.pk %}" class="nav-link">
+          Profile
+        </a>
+      </li>
+
+      <li class="menu-item"><a class="nav-link" href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+    {% else %}
+      <li class="menu-item"><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+    {% endif %}
+  </ul>
+</nav>

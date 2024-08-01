@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="text-center">Todos List App</h1>
+  <p class="text-center">Welcome to your tasks list,  <strong>{{ app_user.username }}</strong>!</p>
+
+  <div class="ml-3">
+      <h4 class="text-center">
+        Tasks
+        <a class="btn btn-primary" href="{% url 'todos:task-create' %}">
+          +
+        </a>
+      </h4>
+
+      {% for task in tasks_list %}
+          <hr>
+          <div class="row">
+            <div class="col-md-8">
+              <p><strong>Description:</strong> {{ task.content }}</p>
+              <p><strong>Created:</strong> {{ task.created_at }}</p>
+              <p>
+                <strong>Deadline:</strong>
+                {% if task.deadline %}
+                  {{ task.deadline }}
+                {% else %}
+                  Without deadline
+                {% endif %}
+              </p>
+
+              <p>
+                <strong>
+                  Tags:
+                </strong>
+
+                {% for tag in task.tags.all %}
+                  <span class="badge badge-secondary">
+                    {{ tag.name }}
+                  </span>
+                {% endfor %}
+              </p>
+            </div>
+
+            <div class="col-md-4 mb-2">
+              <form method="post" action="{% url "todos:task-toggle-status" task.pk %}">
+                {% csrf_token %}
+                {% if task.is_completed %}
+                  <button type="submit" class="btn btn-warning action-button">Undo</button>
+                {% else %}
+                  <button type="submit" class="btn btn-success action-button">Complete</button>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+
+          <p>
+            <a
+                href="{% url 'todos:task-update' pk=task.id %}"
+                class="btn btn-secondary link-to-page action-button"
+            >
+              Update
+            </a>
+
+            <a
+                href="{% url 'todos:task-delete' pk=task.id %}"
+                class="btn btn-danger link-to-page action-button"
+            >
+              Delete
+            </a>
+          </p>
+      {% empty %}
+        <p>No tasks!</p>
+      {% endfor %}
+    </div>
+{% endblock %}

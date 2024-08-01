@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Tags List
+    <a href="{% url 'todos:tag-create' %}" class="btn btn-primary link-to-page">
+      Add
+    </a>
+  </h1>
+
+  {% if tags_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for tag in tags_list %}
+        <tr>
+          <td>
+              {{ tag.id }}
+          </td>
+          <td>
+              {{ tag.name }}
+          </td>
+          <td>
+              <a href="{% url 'todos:tag-update' pk=tag.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a style="color: red"
+                href="{% url 'todos:tag-delete' pk=tag.id %}">
+                Delete
+              </a>
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no tags in the service.</p>
+  {% endif %}
+{% endblock %}
