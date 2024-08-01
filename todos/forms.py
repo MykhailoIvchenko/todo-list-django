@@ -19,7 +19,7 @@ class TaskCreateForm(forms.ModelForm):
         required=False,
     )
     deadline = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "datetime-local", "class": "form-control"}),
+        widget=forms.DateInput(attrs={"type": "date", "class": "form-control"}),
         required=False
         )
     is_completed = forms.BooleanField(
