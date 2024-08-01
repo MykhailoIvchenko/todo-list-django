@@ -15,13 +15,18 @@ class AppUserForm(UserCreationForm):
 class TaskCreateForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(attrs={"class": "form-check-input"}),
         required=False,
     )
     deadline = forms.DateField(
-            widget=forms.DateInput(attrs={'type': 'date'})
+        widget=forms.DateInput(attrs={"type": "datetime-local", "class": "form-control"}),
+        required=False
         )
+    is_completed = forms.BooleanField(
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+        required=False
+    )
 
     class Meta:
         model = Task
-        fields = ['content', 'deadline']
+        fields = ["content", "deadline", "is_completed"]
