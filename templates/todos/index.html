@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Todos List App</h1>
+  <p>Welcome to your tasks list {app_user.username}!</p>
+
+  <div class="ml-3">
+      <h4>Tasks</h4>
+
+      {% for task in tasks %}
+          <hr>
+          <p><strong>Description:</strong> {{ task.content }}</p>
+          <p><strong>Created:</strong> {{ task.created_at }}</p>
+          <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+
+      {% empty %}
+        <p>No tasks!</p>
+      {% endfor %}
+
+      <a href="{% url 'todos:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+        Update
+      </a>
+
+      <a href="{% url 'todos:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+        Delete
+      </a>
+    </div>
+{% endblock %}
