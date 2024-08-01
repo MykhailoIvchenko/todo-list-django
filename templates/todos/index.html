@@ -12,17 +12,17 @@
           <p><strong>Description:</strong> {{ task.content }}</p>
           <p><strong>Created:</strong> {{ task.created_at }}</p>
           <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+        
 
+          <a href="{% url 'todos:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+            Update
+          </a>
+    
+          <a href="{% url 'todos:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+            Delete
+          </a>
       {% empty %}
         <p>No tasks!</p>
       {% endfor %}
-
-      <a href="{% url 'todos:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
-        Update
-      </a>
-
-      <a href="{% url 'todos:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
-        Delete
-      </a>
     </div>
 {% endblock %}
