@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.urls import reverse_lazy
 
+from todos.forms import AppUserForm
 from todos.models import Task, Tag, AppUser
 
 
@@ -51,3 +52,8 @@ class AppUserDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
     template_name = "todos/app_user_confirm_delete.html"
 
 
+class AppUserUpdateView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = AppUser
+    form_class = AppUserForm
+    success_url = reverse_lazy("todos:app_user_detail")
+    template_name = "todos/app_user_form.html"
