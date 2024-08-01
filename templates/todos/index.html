@@ -26,26 +26,44 @@
                   Without deadline
                 {% endif %}
               </p>
+            
+              <p>
+                <strong>
+                  Tags:
+                </strong>
+              
+                {% for tag in task.tags.all %}
+                  <span class="badge badge-secondary">
+                    {{ tag.name }}
+                  </span>
+                {% endfor %}
+              </p>
             </div>
 
             <div class="col-md-4 mb-2">
               <form method="post" action="{% url "todos:task-toggle-status" task.pk %}">
                 {% csrf_token %}
                 {% if task.is_completed %}
-                  <button type="submit" class="btn btn-warning">Undo</button>
+                  <button type="submit" class="btn btn-warning action-button">Undo</button>
                 {% else %}
-                  <button type="submit" class="btn btn-success">Complete</button>
+                  <button type="submit" class="btn btn-success action-button">Complete</button>
                 {% endif %}
               </form>
             </div>
           </div>
 
           <p>
-            <a href="{% url 'todos:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+            <a 
+                href="{% url 'todos:task-update' pk=task.id %}" 
+                class="btn btn-secondary link-to-page action-button"
+            >
               Update
             </a>
 
-            <a href="{% url 'todos:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+            <a 
+                href="{% url 'todos:task-delete' pk=task.id %}" 
+                class="btn btn-danger link-to-page action-button"
+            >
               Delete
             </a>
           </p>

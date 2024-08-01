@@ -73,3 +73,6 @@ ul {
     align-items: center;
 }
 
+.action-button {
+    min-width: 100px;
+}
