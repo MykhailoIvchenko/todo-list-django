@@ -23,3 +23,18 @@ class Tag(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Task(models.Model):
+    content = models.TextField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField(null=True, blank=True)
+    is_completed = models.BooleanField(default=False)
+    tags = models.ManyToManyField(Tag, related_name="tasks")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
+
+    class Meta:
+        ordering = ['is_completed', '-created_at']
+
+    def __str__(self):
+        return f"{self.content}"
