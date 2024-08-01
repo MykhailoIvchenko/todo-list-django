@@ -43,3 +43,11 @@ class AppUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = AppUser
     template_name = "todos/app_user_detail.html"
     context_object_name = 'app_user'
+
+
+class AppUserDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = AppUser
+    success_url = reverse_lazy("todos:index")
+    template_name = "todos/app_user_confirm_delete.html"
+
+
