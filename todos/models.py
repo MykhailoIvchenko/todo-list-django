@@ -31,10 +31,11 @@ class Task(models.Model):
     deadline = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="tasks")
-    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name="user")
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE,
+                             related_name="user")
 
     class Meta:
-        ordering = ['is_completed', '-created_at']
+        ordering = ["is_completed", "-created_at"]
 
     def __str__(self):
         return f"{self.content}"

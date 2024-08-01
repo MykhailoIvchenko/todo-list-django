@@ -28,4 +28,3 @@ class TaskAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Tag)
-

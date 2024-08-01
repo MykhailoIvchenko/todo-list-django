@@ -14,11 +14,12 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     template_name = "todos/index.html"
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user).prefetch_related("tags")
+        return Task.objects.filter(user=self.request.user).prefetch_related(
+            "tags")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['app_user'] = self.request.user
+        context["app_user"] = self.request.user
         return context
 
 
@@ -49,7 +50,7 @@ class TagDeleteView(LoginRequiredMixin, generic.DeleteView):
 class AppUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = AppUser
     template_name = "todos/app_user_detail.html"
-    context_object_name = 'app_user'
+    context_object_name = "app_user"
 
     def get_object(self, queryset=None):
         obj = super().get_object(queryset)
