@@ -31,7 +31,7 @@ class Task(models.Model):
     deadline = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag, related_name="tasks")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name="user")
 
     class Meta:
         ordering = ['is_completed', '-created_at']
