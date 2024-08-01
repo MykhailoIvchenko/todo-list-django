@@ -24,7 +24,7 @@ class AppUserAdmin(UserAdmin):
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     search_fields = ("content",)
-    list_filter = ("app_user",)
+    list_filter = ("user",)
 
 
 admin.site.register(Tag)
