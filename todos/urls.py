@@ -38,15 +38,15 @@ urlpatterns = [
         name="tag-delete",
     ),
     path(
-        "profile/", AppUserDetailView.as_view(), name="app_user-detail"
+        "profile/<int:pk>", AppUserDetailView.as_view(), name="app_user-detail"
     ),
     path(
-        "profile/update/",
+        "profile/<int:pk>/update/",
         AppUserUpdateView.as_view(),
         name="app_user-update",
     ),
     path(
-        "profile/delete/",
+        "profile/<int:pk>/delete/",
         AppUserDeleteView.as_view(),
         name="app_user-delete",
     ),

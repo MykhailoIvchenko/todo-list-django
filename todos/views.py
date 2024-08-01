@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views import generic
 from django.urls import reverse_lazy
@@ -49,6 +50,12 @@ class AppUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = AppUser
     template_name = "todos/app_user_detail.html"
     context_object_name = 'app_user'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj != self.request.user:
+            raise Http404("You do not have permission to view this page.")
+        return obj
 
 
 class AppUserDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
