@@ -29,4 +29,4 @@ class TaskCreateForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ["content", "deadline", "is_completed"]
+        fields = ["content", "deadline", "is_completed", "tags"]
