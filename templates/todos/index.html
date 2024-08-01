@@ -26,12 +26,12 @@
                   Without deadline
                 {% endif %}
               </p>
-            
+
               <p>
                 <strong>
                   Tags:
                 </strong>
-              
+
                 {% for tag in task.tags.all %}
                   <span class="badge badge-secondary">
                     {{ tag.name }}
@@ -53,15 +53,15 @@
           </div>
 
           <p>
-            <a 
-                href="{% url 'todos:task-update' pk=task.id %}" 
+            <a
+                href="{% url 'todos:task-update' pk=task.id %}"
                 class="btn btn-secondary link-to-page action-button"
             >
               Update
             </a>
 
-            <a 
-                href="{% url 'todos:task-delete' pk=task.id %}" 
+            <a
+                href="{% url 'todos:task-delete' pk=task.id %}"
                 class="btn btn-danger link-to-page action-button"
             >
               Delete
